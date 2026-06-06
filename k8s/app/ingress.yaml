@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traffic-guard-ingress
+  namespace: default
+  annotations:
+    # 1. Wskazujemy, że ruchem ma sterować NGINX
+    kubernetes.io/ingress.class: nginx
+    
+    # 2. Mówimy cert-managerowi: "Hej, wygeneruj mi darmowy certyfikat z Let's Encrypt!"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+    - hosts:
+        - traffic-guard.westeurope.cloudapp.azure.com
+      secretName: traffic-guard-tls-secret
+  rules:
+    - host: traffic-guard.westeurope.cloudapp.azure.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                # Wskazujemy na usługę stworzoną w poprzednim kroku!
+                name: traffic-guard-svc
+                port:
+                  number: 80
