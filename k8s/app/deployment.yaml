@@ -17,7 +17,6 @@ spec:
     spec:
       containers:
         - name: traffic-guard-container
-          # TUTAJ podmień nazwę na swój faktyczny ACR:
           image: aksprodacr913xD02.azurecr.io/traffic-guard-app:latest
           imagePullPolicy: Always
           ports:
