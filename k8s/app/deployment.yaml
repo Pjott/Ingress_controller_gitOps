@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traffic-guard-app
+  namespace: default
+  labels:
+    app: traffic-guard
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: traffic-guard
+  template:
+    metadata:
+      labels:
+        app: traffic-guard
+    spec:
+      containers:
+        - name: traffic-guard-container
+          # TUTAJ podmień nazwę na swój faktyczny ACR:
+          image: aksprodacr913xD02.azurecr.io/traffic-guard-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
