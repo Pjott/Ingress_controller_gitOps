@@ -7,8 +7,16 @@ spec:
   project: default
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.10.0 # Wskazujemy stabilną wersję paczki Helm
+    targetRevision: 4.10.0
     chart: ingress-nginx
+    # --- Wstrzyknięcie etykiety DNS dla Azure ---
+    helm:
+      values: |
+        controller:
+          service:
+            annotations:
+              service.beta.kubernetes.io/azure-dns-label-name: "traffic-guard"
+    # --------------------------------------------------------------
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx
