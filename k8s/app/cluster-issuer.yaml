@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod # Ta nazwa musi się zgadzać z tą w ingress.yaml!
+spec:
+  acme:
+    # URL produkcyjnego serwera Let's Encrypt
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: dummyfak3mail@op.pl
+    privateKeySecretRef:
+      name: letsencrypt-prod-account-key
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
