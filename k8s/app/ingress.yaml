@@ -10,6 +10,7 @@ metadata:
     # 2. Mówimy cert-managerowi: "Hej, wygeneruj mi darmowy certyfikat z Let's Encrypt!"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
+  ingressClassName: nginx
   tls:
     - hosts:
         - traffic-guard.westeurope.cloudapp.azure.com
