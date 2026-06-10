@@ -13,3 +13,18 @@ spec:
       - http01:
           ingress:
             ingressClassName: nginx
+####TEST ENVIRONMENT
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: ummyfak3mail@op.pl
+    privateKeySecretRef:
+      name: letsencrypt-staging-account-key
+    solvers:
+      - http01:
+          ingress:
+            ingressClassName: nginx
