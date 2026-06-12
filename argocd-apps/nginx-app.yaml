@@ -15,7 +15,7 @@ spec:
           service:
             annotations:
               service.beta.kubernetes.io/azure-load-balancer-resource-group: "MC_aks-prod-rg_aks-prod-cluster_westeurope"
-            loadBalancerIP: "40.113.133.141"
+              service.beta.kubernetes.io/azure-load-balancer-ipv4: "40.113.133.141"
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: ingress-nginx
